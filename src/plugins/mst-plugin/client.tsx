@@ -60,15 +60,5 @@ export default class MSTClient {
         </Provider>
       );
     });
-
-    clientHandler.hooks.beforeRender.tapPromise('AddMSTProvider', async (app) => {
-      app.children = (
-        <Provider value={window.mstStore}>
-          <NominationProvider>
-            {app.children}
-          </NominationProvider>
-        </Provider>
-      );
-    });
   }
 }
