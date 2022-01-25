@@ -1,0 +1,69 @@
+*,
+*::before,
+*::after {
+	box-sizing: border-box; // 1
+}
+
+html {
+	font-family: $font-family; // 2
+	line-height: 21px; // 3
+	-webkit-text-size-adjust: 100%; // 4
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0); // 5
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-size: 14px;
+	scroll-behavior: smooth;
+	height: 100%;
+	position: relative;
+	//overflow-x: hidden;
+}
+
+// Body
+//
+// 1. Remove the margin in all browsers.
+// 2. As a best practice, apply a default `background-color`.
+// 3. Set an explicit initial text-align value so that we can later use
+//    the `inherit` value on things like `<th>` elements.
+body {
+	margin: 0; // 1
+	font-family: $font-family;
+	font-size: $font-size-base;
+	font-weight: $font-weight-base;
+	line-height: $line-height-base;
+	color: $body-color;
+	text-align: left; // 3
+	background-color: $body-bg; // 2
+	overflow-x: hidden;
+	min-height: 100%;
+	position: relative;
+}
+
+a {
+	text-decoration: none;
+	&:focus {
+		outline: 0;
+	}
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	margin: 0 0 0.5rem 0;
+}
+
+button {
+	cursor: pointer;
+	font-family: $font-family;
+}
+
+img {
+	max-width: 100%;
+}
+
+a {
+	color: $primary;
+}

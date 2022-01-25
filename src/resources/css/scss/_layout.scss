@@ -1,0 +1,28 @@
+.container {
+  max-width: $container-width;
+  margin: 0 auto;
+  padding: 0 $container-padding;
+  position: relative;
+  width: 100%;
+}
+
+.no-smooth-scroll {
+  scroll-behavior: auto;
+}
+
+.container-fluid {
+  max-width: 100%;
+}
+
+.container-with-negative-margin {
+  margin: 0 #{-$container-padding};
+}
+
+@media (max-width: $sm-device) {
+  .container {
+      padding: 0 $container-sm-padding;
+  }
+  .container-with-negative-margin {
+      margin: 0 #{-$container-sm-padding};
+  }
+}

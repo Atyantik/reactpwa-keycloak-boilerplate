@@ -1,0 +1,346 @@
+@use "sass:math";
+
+@mixin list-unstyled {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+@mixin text-truncate {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+@mixin placeholder {
+	&::-webkit-input-placeholder {
+		@content;
+	}
+	&:-moz-placeholder {
+		@content;
+	}
+	&::-moz-placeholder {
+		@content;
+	}
+	&:-ms-input-placeholder {
+		@content;
+	}
+}
+
+@mixin keyframes($animationName) {
+	@-webkit-keyframes #{$animationName} {
+		@content;
+	}
+	@-moz-keyframes #{$animationName} {
+		@content;
+	}
+	@-o-keyframes #{$animationName} {
+		@content;
+	}
+	@keyframes #{$animationName} {
+		@content;
+	}
+}
+
+@mixin scrollbars($size, $border-size, $border-radius, $bg-scroll-color, $foreground-color, $background-color) {
+	// For Google Chrome
+	&::-webkit-scrollbar {
+		width: $size;
+		background-color: $bg-scroll-color;
+		border-radius: $border-radius;
+	}
+	&::-webkit-scrollbar-track {
+		border-radius: $border-radius;
+		background: $foreground-color;
+		border: $border-size solid transparent;
+		background-clip: content-box;
+		margin: rem(14px) 0;
+	}
+	&::-webkit-scrollbar-thumb {
+		border-radius: $border-radius;
+		background: $background-color;
+		border: $border-size solid transparent;
+		background-clip: content-box;
+	}
+	// For Internet Explorer
+	& {
+		scrollbar-face-color: $foreground-color;
+		scrollbar-track-color: $background-color;
+	}
+}
+
+@mixin scrollbars2($size, $border-radius, $foreground-color, $background-color) {
+    // For Google Chrome
+    &::-webkit-scrollbar {
+        width: $size;
+        height: $size;
+        border-radius: $border-radius;
+    }
+    &::-webkit-scrollbar-thumb {
+        background: $foreground-color;
+        border-radius: $border-radius;
+    }
+    &::-webkit-scrollbar-track {
+        background: transparent;
+        border-radius: $border-radius;
+    }
+    &::-webkit-scrollbar-track-piece:end {
+        background: $background-color;
+        margin-right: 1rem;
+        border-radius: $border-radius;
+    }
+    &::-webkit-scrollbar-track-piece:start {
+        background: $background-color;
+        margin-left: 1rem;
+        border-radius: $border-radius;
+    }
+    // For Internet Explorer
+    & {
+        scrollbar-face-color: $foreground-color;
+        scrollbar-track-color: $background-color;
+    }
+}
+
+@mixin img-aspect-ratio {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	top: 0;
+	height: 100%;
+	width: 100%;
+	object-fit: contain;
+	object-position: center;
+	margin: 0 auto;
+}
+
+@mixin multi-line-ellipsis-2 {
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+
+@mixin fix-container {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	height: 100%;
+	width: 100%;
+}
+
+/* ------------------------------------------------ */
+/*               New Mixins                         */
+/* ------------------------------------------------ */
+
+@function strip-unit($value) {
+    @return $value / ($value * 0 + 1);
+}
+
+
+/*
+	Responsive ratio
+	Used for creating scalable elements that maintain the same ratio
+	example:
+	.element {
+		@include responsive-ratio(400, 300);
+	}
+*/
+
+@mixin responsive-ratio($x, $y, $pseudo: false) {
+    $padding: unquote(($y / $x) * 100 + "%");
+    @if $pseudo {
+        &::before {
+            @include pseudo($pos: relative);
+            width: 100%;
+            padding-top: $padding;
+        }
+    }
+    @else {
+        padding-top: $padding;
+    }
+}
+
+
+/*
+	Hide text
+	example:
+	.element {
+		@include hide-text;
+	}
+*/
+
+@mixin hide-text {
+    border: none !important;
+    clip: rect(0, 0, 0, 0) !important;
+    height: 0.01em !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    position: absolute !important;
+    white-space: nowrap !important;
+    width: 0.01em !important;
+}
+
+// link Hover State
+// 	@include hover-state {
+// 		text-decoration: underline;
+// 	}
+@mixin hover {
+	&:hover,
+	&:active {
+		@content;
+	}
+}
+
+@mixin center-pos {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+// Center block
+@mixin center-block {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+// Clearfix
+@mixin clearfix() {
+    content: "";
+    display: table;
+    table-layout: fixed;
+}
+
+// Convert pixels to rems
+// @mixin fs($target) {
+// 	// @return ($target / 16px) * 1rem;
+// 	font-size: ($target)*1px;
+// 	font-size: ($target / 16) * 1rem;
+// }
+@function fs($target) {
+    @return ($target / 14px) * 1rem;
+}
+
+//Responsive
+@mixin for-phone-only {
+    @media (max-width: 599px) {
+        @content;
+    }
+}
+
+@mixin for-tablet-portrait-up {
+    @media (min-width: 600px) {
+        @content;
+    }
+}
+
+@mixin for-tablet-landscape-up {
+    @media (min-width: 900px) {
+        @content;
+    }
+}
+
+@mixin for-desktop-up {
+    @media (min-width: 1200px) {
+        @content;
+    }
+}
+
+@mixin for-big-desktop-up {
+    @media (min-width: 1800px) {
+        @content;
+    }
+}
+
+// breakpoints
+$S: 767px;
+$M: 960px;
+$L: 1024px;
+$base_width: null;
+// media queries
+@mixin MQ($canvas) {
+    @if $canvas==S {
+        // $base_width: $S;
+        @media only screen and (max-width: $S) {
+            @content;
+        }
+    }
+    @else if $canvas==M {
+        // $base_width: $M;
+        @media only screen and (max-width: $M) {
+            @content;
+        }
+    }
+    @else if $canvas==L {
+        // $base_width: $L;
+        @media only screen and (max-width: $L) {
+            @content;
+        }
+    }
+    @else {
+        @media only screen and (max-width: $canvas) {
+            @content;
+        }
+    }
+}
+
+@function vw($target) {
+    $vw-context: (1280 * 0.01) * 1px;
+    @return math.div($target, $vw-context) * 1vw;
+}
+
+@function vh($target) {
+    $vw-context: (1080 * 0.01) * 1px;
+    @return math.div($target, $vw-context) * 1vh;
+}
+
+@function ls($target) {
+    @return math.div($target, 1000px) * 1em;
+    //letter-spacing: ls(80px);
+}
+
+@function ps($target) {
+    $vw-context: (1920 * 0.01) * 1px;
+    @return math.div($target, $vw-context) * 1%;
+}
+
+
+/*
+	Misc
+*/
+
+@mixin align($vertical: true, $horizontal: false, $position: relative) {
+    @if $position {
+        position: $position;
+    }
+    @if $vertical {
+        top: 50%;
+    }
+    @if $horizontal {
+        left: 50%;
+    }
+    @if $vertical and $horizontal {
+        transform: translateX(-50%) translateY(-50%);
+    }
+    @else if $vertical {
+        transform: translateY(-50%);
+    }
+    @else {
+        transform: translateX(-50%);
+    }
+}
+
+// .results div{
+//   @include delay(animation, 1, 8, 0.25s);
+// }
+@mixin delay($rule, $from, $to, $value) {
+  @for $i from $from to ($to + 1) {
+    &:nth-child(#{$i}) {
+      #{$rule}-delay: (#{$i*$value});
+    }
+  }
+}

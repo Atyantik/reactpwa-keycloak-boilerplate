@@ -1,0 +1,46 @@
+@import 'scss/variable';
+@import 'scss/mixins';
+@import 'scss/reboot';
+@import 'scss/layout';
+@import 'scss/typography';
+
+// add Font face here only. for some reason it only works from here.
+// I will have to debug more in details.
+@font-face {
+    font-family: 'MADE Bon Voyage';
+    src: url('../fonts/MADE_Bon_Voyage/Regular/MADEBonVoyage.eot');
+    src: url('../fonts/MADE_Bon_Voyage/Regular/MADEBonVoyage.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/MADE_Bon_Voyage/Regular/MADEBonVoyage.woff2') format('woff2'),
+        url('../fonts/MADE_Bon_Voyage/Regular/MADEBonVoyage.woff') format('woff'),
+        url('../fonts/MADE_Bon_Voyage/Regular/MADEBonVoyage.ttf') format('truetype'),
+        url('../fonts/MADE_Bon_Voyage/Regular/MADEBonVoyage.svg#MADEBonVoyage') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'TradeGothic LT Extended';
+    src: url('../fonts/Trade_Gothic_LT_Extended/Regular/TradeGothicLT-Extended.eot');
+    src: url('../fonts/Trade_Gothic_LT_Extended/Regular/TradeGothicLT-Extended.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/Trade_Gothic_LT_Extended/Regular/TradeGothicLT-Extended.woff2') format('woff2'),
+        url('../fonts/Trade_Gothic_LT_Extended/Regular/TradeGothicLT-Extended.woff') format('woff'),
+        url('../fonts/Trade_Gothic_LT_Extended/Regular/TradeGothicLT-Extended.ttf') format('truetype'),
+        url('../fonts/Trade_Gothic_LT_Extended/Regular/TradeGothicLT-Extended.svg#TradeGothicLT-Extended') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Avenir';
+    src: url('../fonts/Avenir/Light/Avenir-Light.eot');
+    src: url('../fonts/Avenir/Light/Avenir-Light.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/Avenir/Light/Avenir-Light.woff2') format('woff2'),
+        url('../fonts/Avenir/Light/Avenir-Light.woff') format('woff'),
+        url('../fonts/Avenir/Light/Avenir-Light.ttf') format('truetype'),
+        url('../fonts/Avenir/Light/Avenir-Light.svg#Avenir-Light') format('svg');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}

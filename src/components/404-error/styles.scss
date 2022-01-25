@@ -1,0 +1,24 @@
+@import '../../resources/css/scss/variable';
+@import '../../resources/css/scss/mixins';
+
+.error-page-section {
+	min-height: 70vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	@include MQ($sm-device) {
+		padding: 0 $container-sm-padding;
+	}
+}
+
+.error-page-wrapper {
+	width: rem(500px);
+	max-width: 100%;
+	text-align: center;
+
+	a {
+		width: rem(380px);
+		max-width: 100%;
+		margin: 0 auto;
+	}
+}

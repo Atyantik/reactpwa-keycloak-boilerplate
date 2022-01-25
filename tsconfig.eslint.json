@@ -1,0 +1,28 @@
+{
+  // extend your base config so you don't have to redefine your compilerOptions
+  "extends": "./tsconfig.json",
+  "include": [
+    "src/**/*.ts",
+    "webpack.resolver.js",
+    "src/**/*.tsx",
+    "test/**/*.ts",
+    "test/**/*.tsx",
+    "typings/**/*.ts"
+  ],
+  "no-submodule-imports": [
+    true,
+    "@pawjs",
+    "lodash",
+    "react-dom",
+    "@babel",
+    "@plugins",
+    "@resources",
+    "@components",
+    "@utils",
+    "@hooks",
+    "@pages",
+    "@models",
+    "@routes",
+    "@formatjs"
+  ]
+}

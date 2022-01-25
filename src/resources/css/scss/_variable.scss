@@ -1,0 +1,90 @@
+@use 'sass:math';
+
+@function rem($size) {
+    @return math.div($size, 14px) * 1rem;
+}
+
+@function em($size) {
+    @return math.div($size, 14px)* 1em;
+}
+
+// font-info
+$font-family: 'Avenir',
+sans-serif;
+$font-size-base: rem(14px); //14px
+$font-weight-base: 300;
+$line-height-base: rem(21px); //21px
+// colors
+$white: #ffffff;
+$black: #000000;
+$light: #f1f1f1;
+$dark: #222222;
+$golden: #978544;
+$danger: #fc5252;
+$success: #58db83;
+$warning: #f5b225;
+// theme colors
+$primary: $black;
+$secondary: $golden;
+$gray30: #b9b9b9;
+$gray70: #e7e7e7;
+$gray60: #c4c4c4;
+// body
+$body-bg: $white;
+$body-color: $black;
+$body-font-size: $font-size-base; //14px
+$body-line-height: $line-height-base; //21px
+//heading
+$heading-color: $body-color;
+//h1
+$heading-font-family: 'TradeGothic LT Extended',
+sans-serif;
+$heading2-font-family: 'MADE Bon Voyage',
+serif;
+//h1
+$heading1-font-size: rem(94px);
+$heading1-line-height: rem(99px);
+$heading1-font-size-sm: rem(48px);
+$heading1-line-height-sm: rem(52px);
+//h1 font-family2
+$heading1-font-size-2: rem(94px);
+$heading1-line-height-2: rem(100px);
+$heading1-font-size-sm-2: rem(51px);
+$heading1-line-height-sm-2: rem(58px);
+//h2
+$heading2-font-size: rem(34px);
+$heading2-line-height: rem(44px);
+$heading2-letter-spacing: 0.1em;
+$heading2-font-size-sm: rem(30px);
+$heading2-line-height-sm: rem(38px);
+//h2 font-family2
+$heading2-font-size-2: rem(34px);
+$heading2-line-height-2: rem(44px);
+$heading2-letter-spacing-2: 0.1em;
+$heading2-font-size-sm-2: rem(30px);
+$heading2-line-height-sm-2: rem(36px);
+//h3
+$heading3-font-size: rem(16px);
+$heading3-line-height: rem(24px);
+$heading3-letter-spacing: 0.1em;
+//buttons
+$btn-font-size: rem(10px);
+$btn-line-height: rem(16px);
+$btn-letter-spacing: 0.2em;
+$btn-font-family: $heading-font-family;
+$btn-border-radius: rem(30px);
+$btn-font-weight: normal;
+//input
+// container-width
+$container-width: rem(1380px) !default;
+$container-padding: rem(50px) !default;
+$container-sm-padding: rem(20px) !default;
+//breakpoints
+$xl-device: 1440px; //1440+desktop
+$lg-device: 1024px; // 1024+ tablet
+$md-device: 768px; // 768+ tablet
+$sm-device: 767px; //375+ mobile
+$xs-device: 375px;
+// Header Height
+$header-height: rem(88px);
+$mobile-header-height: rem(88px);
