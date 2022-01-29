@@ -10,7 +10,31 @@ const KEYCLOAK_BASE_URL = getEnv('KEYCLOAK_BASE_URL', process.env.KEYCLOAK_BASE_
 const KEYCLOAK_REALM = getEnv('KEYCLOAK_REALM', process.env.KEYCLOAK_REALM);
 const KEYCLOAK_CLIENT_ID = getEnv('KEYCLOAK_REALM', process.env.KEYCLOAK_CLIENT_ID);
 
+export const getKeycloak = () => {
+  if (!keycloakRef.instance) {
+    throw new Error('Keycloak not initialized.');
+  }
+  return keycloakRef.instance;
+};
+
+export const refreshToken = async (checkDistance = 5) => {
+  try {
+    const keycloak = getKeycloak();
+    await keycloak.updateToken(checkDistance);
+    return true;
+  } catch {
+    return false;
+  }
+};
+
 export const initializeKeycloak = async (fetcher: FetchFactory) => {
+  if (
+    !KEYCLOAK_BASE_URL
+    || !KEYCLOAK_REALM
+    || !KEYCLOAK_CLIENT_ID
+  ) {
+    throw new Error('Keycloak parameters missing in Environment');
+  }
   let Keycloak;
   if (!keycloakRef.module) {
     const keycloakModule = await import('keycloak-js');
@@ -41,16 +65,18 @@ export const initializeKeycloak = async (fetcher: FetchFactory) => {
       const checkDistance = 10;
       const nextTimeToUpdate = (keycloak.tokenParsed.exp * 1000) - new Date().getTime() - (checkDistance * 1000);
       setTimeout(() => {
-        keycloak.updateToken(checkDistance).then((refreshed: boolean) => {
-          if (refreshed) {
-            fetcher.setToken(keycloak.token);
-            updateToken();
-          }
-        }).catch(() => {
-          return keycloak.login({
-            redirectUri: window.location.href,
+        refreshToken(checkDistance)
+          .then((refreshed: boolean) => {
+            if (refreshed) {
+              fetcher.setToken(keycloak.token);
+              updateToken();
+            }
+          })
+          .catch(() => {
+            return keycloak.login({
+              redirectUri: window.location.href,
+            });
           });
-        });
       }, nextTimeToUpdate);
     };
     updateToken();
@@ -59,13 +85,10 @@ export const initializeKeycloak = async (fetcher: FetchFactory) => {
   return keycloakRef.instance;
 };
 
-export const getKeycloak = () => {
-  if (!keycloakRef.instance) {
-    throw new Error('Keycloak not initialized.');
-  }
-  return keycloakRef.instance;
-};
-
+export const isLoggedIn = () => !!(
+  keycloakRef.instance &&
+  keycloakRef.instance?.authenticated
+);
 
 export const login = async () => {
   if (!keycloakRef.instance) {

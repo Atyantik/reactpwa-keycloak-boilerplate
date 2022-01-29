@@ -1,6 +1,6 @@
 import RouteHandler from '@pawjs/pawjs/src/router/handler';
 import GuestRoutes from '@routes/guest';
-import NotFoundComponent from '@components/404-error/index';
+import NotFoundComponent from '@components/errors/error-404';
 
 export default class Routes {
   apply(routeHandler: RouteHandler) {
